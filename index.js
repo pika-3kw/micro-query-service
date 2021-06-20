@@ -31,12 +31,26 @@ app.post("/events", (req, res) => {
   }
 
   if (type === "CommentCreated") {
-    const { _id, postId, content } = data;
-    const comment = { _id, postId, content };
+    const { _id, postId, content, status } = data;
+    const comment = { _id, postId, content, status };
     const postIdx = posts.findIndex((post) => post._id === postId);
 
     if (postIdx >= 0) {
       posts[postIdx].comments.push(comment);
+    }
+  }
+
+  if (type === "CommentUpdated") {
+    const { _id, postId, content, status } = data;
+    const comment = { _id, postId, content, status };
+    const postIdx = posts.findIndex((post) => post._id === postId);
+
+    if (postIdx >= 0) {
+      const commentIdx = posts[postIdx].comments.findIndex(
+        (comment) => comment._id === _id
+      );
+
+      posts[postIdx].comments[commentIdx] = comment;
     }
   }
 
