@@ -69,7 +69,7 @@ app.post("/events", (req, res) => {
 app.listen(4003, async () => {
   console.log("Query Service in running at 4003");
 
-  const res = await axios.get("http://localhost:4000/events");
+  const res = await axios.get("hhttp://event-bus-srv:4000/events");
 
   const events = res.data;
 
